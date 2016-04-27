@@ -2909,34 +2909,88 @@
 
           <dd>
             <p>Returns a sequence of <code><a>RTCRtpSender</a></code> objects
-            representing the RTP senders that are currently attached to this
+            representing the RTP senders in the RTP transceivers that are
+            currently attached to this
             <code><a>RTCPeerConnection</a></code> object.</p>
 
-            <p>The <dfn id=
-            "dom-peerconnection-getsenders"><code>getSenders()</code></dfn>
-            method MUST return a new sequence that represents a snapshot of all
-            the <code><a>RTCRtpSender</a></code> objects in this
-            <code><a>RTCPeerConnection</a></code> object's <a href=
-            "#senders-set">set of senders</a>. The conversion from the
-            senders set to the sequence, to be returned, is user agent defined
-            and the order does not have to be stable between calls.</p>
+            <p>When the <dfn id="dom-peerconnection-getsenders">
+            <code>getSenders()</code></dfn> method is invoked, the user agent
+            MUST run the following steps:</p>
+
+            <ol>
+              <li>
+              	Let <var>connection</var> be the
+                <code><a>RTCPeerConnection</a></code> object on 
+              	which <code>getSenders</code> is invoked.
+              </li>
+
+              <li>
+                <p>Let <var>transceivers</var> be <var>connection</var>'s
+                <a href="#transceivers-set">set of transceivers</a>.</p>
+              </li>
+
+              <li>
+                <p>Let <var>senders</var> be an empty set.</p>
+              </li>
+
+              <li>
+                <p>For each <var>transceiver</var> in
+                <var>transceivers</var>, add the value of the 
+                <code><var>transceiver</var>.sender</code> attribute
+                to <var>senders</var>.</p>
+              </li>
+
+              <li>
+                <p>Return a new sequence representing all of the objects in
+                <var>senders</var>.  The conversion from this set to the
+                sequence to be returned is user agent defined and the order
+                does not have to be stable between calls.</p>
+              </li>
+            </ol>
           </dd>
 
           <dt>sequence&lt;RTCRtpReceiver&gt; getReceivers()</dt>
 
           <dd>
             <p>Returns a sequence of <code><a>RTCRtpReceiver</a></code> objects
-            representing the RTP receivers that are currently attached to this
+            representing the RTP receivers in the RTP transceivers that are
+            currently attached to this
             <code><a>RTCPeerConnection</a></code> object.</p>
 
-            <p>The <dfn id=
-            "dom-peerconnection-getreceivers"><code>getReceivers()</code></dfn>
-            method MUST return a new sequence that represents a snapshot of all
-            the <code><a>RTCRtpReceiver</a></code> objects in this
-            <code><a>RTCPeerConnection</a></code> object's <a href=
-            "#receivers-set">set of receivers</a>. The conversion from
-            the receivers set to the sequence, to be returned, is user agent
-            defined and the order does not have to be stable between calls.</p>
+            <p>When the <dfn id="dom-peerconnection-getreceivers">
+            <code>getReceivers()</code></dfn> method is invoked, the user agent
+            MUST run the following steps:</p>
+
+            <ol>
+              <li>
+              	Let <var>connection</var> be the
+                <code><a>RTCPeerConnection</a></code> object on 
+              	which <code>getReceivers</code> is invoked.
+              </li>
+
+              <li>
+                <p>Let <var>transceivers</var> be <var>connection</var>'s
+                <a href="#transceivers-set">set of transceivers</a>.</p>
+              </li>
+
+              <li>
+                <p>Let <var>receivers</var> be an empty set.</p>
+              </li>
+
+              <li>
+                <p>For each <var>transceiver</var> in
+                <var>transceivers</var>, add the value of the
+                <code><var>transceiver</var>.receiver</code> attribute
+                to <var>receivers</var>.</p>
+              </li>
+
+              <li>
+                <p>Return a new sequence representing all of the objects in
+                <var>receivers</var>.  The conversion from this set to the
+                sequence to be returned is user agent defined and the order
+                does not have to be stable between calls.</p>
+              </li>
+            </ol>
           </dd>
 
           <dt>sequence&lt;RTCRtpTransceiver&gt; getTransceivers()</dt>
